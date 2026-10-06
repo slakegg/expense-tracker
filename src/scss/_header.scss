@@ -1,0 +1,32 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.header {
+  background: v.$surface-color;
+  border-bottom: 1px solid v.$border-color;
+
+  &__inner {
+    @include m.flex(row, flex-start, center, v.$space-md);
+    max-width: 960px;
+    margin: 0 auto;
+    padding: v.$space-md;
+  }
+  &__logo { flex: 1; font-size: 1.25rem; font-weight: 700; color: v.$primary-color; }
+  &__user { @include m.flex(row, flex-start, center, v.$space-sm); }
+  &__avatar { width: 32px; height: 32px; border-radius: 50%; }
+  &__greeting { color: v.$muted-color; }
+}
+
+.btn {
+  padding: v.$space-sm v.$space-md;
+  border: 1px solid transparent;
+  border-radius: v.$radius;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  &:focus-visible { outline: 2px solid v.$primary-color; outline-offset: 2px; }
+
+  &--google { background: #fff; color: #222; }
+  &--primary { background: v.$primary-color; color: #0d0f18; }
+  &--outline { background: transparent; border-color: v.$border-color; color: v.$text-color; }
+}

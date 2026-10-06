@@ -1,0 +1,23 @@
+@use 'variables' as v;
+
+.form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: v.$space-sm;
+  margin-bottom: v.$space-lg;
+  padding: v.$space-md;
+  background: v.$surface-color;
+  border-radius: v.$radius;
+
+  &__title { grid-column: 1 / -1; margin: 0; font-size: 1.1rem; }
+  &__field {
+    padding: v.$space-sm;
+    background: v.$bg-color;
+    color: v.$text-color;
+    border: 1px solid v.$border-color;
+    border-radius: v.$radius;
+    font: inherit;
+    &:focus { outline: 2px solid v.$primary-color; }
+  }
+  &__error { grid-column: 1 / -1; margin: 0; color: v.$expense-color; }
+}

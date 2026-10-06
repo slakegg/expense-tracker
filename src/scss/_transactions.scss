@@ -1,0 +1,52 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.transactions__title { margin: 0 0 v.$space-md; font-size: 1.1rem; }
+
+$columns: 1fr 150px 110px 140px 40px;
+
+.transaction-list {
+  background: v.$surface-color;
+  border-radius: v.$radius;
+  overflow: hidden;
+
+  &__head {
+    display: grid;
+    grid-template-columns: $columns;
+    gap: v.$space-md;
+    padding: v.$space-sm v.$space-md;
+    color: v.$muted-color;
+    font-size: 0.85rem;
+    border-bottom: 1px solid v.$border-color;
+  }
+}
+
+.transaction-item {
+  display: grid;
+  grid-template-columns: $columns;
+  gap: v.$space-md;
+  align-items: center;
+  padding: v.$space-md;
+  border-bottom: 1px solid v.$border-color;
+  &:last-child { border-bottom: 0; }
+
+  &__title { font-weight: 500; }
+  &__date { color: v.$muted-color; font-size: 0.9rem; }
+  &__amount {
+    font-weight: 700;
+    text-align: right;
+    &--income { color: v.$income-color; }
+    &--expense { color: v.$expense-color; }
+  }
+  &__delete {
+    background: none; border: 0; color: v.$muted-color; font-size: 1.1rem; cursor: pointer;
+    &:hover { color: v.$expense-color; }
+  }
+}
+
+.badge {
+  justify-self: start;
+  padding: 2px v.$space-sm;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
