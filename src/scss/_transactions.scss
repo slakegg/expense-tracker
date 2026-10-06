@@ -18,6 +18,7 @@ $columns: 1fr 150px 110px 140px 40px;
     color: v.$muted-color;
     font-size: 0.85rem;
     border-bottom: 1px solid v.$border-color;
+    @include m.respond-to(mobile) { display: none; }
   }
 }
 
@@ -41,6 +42,18 @@ $columns: 1fr 150px 110px 140px 40px;
   &__delete {
     background: none; border: 0; color: v.$muted-color; font-size: 1.1rem; cursor: pointer;
     &:hover { color: v.$expense-color; }
+  }
+
+  // Мобильные: строка таблицы превращается в вертикальную карточку
+  @include m.respond-to(mobile) {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'title amount' 'badge date' 'delete delete';
+    gap: v.$space-sm;
+    &__title { grid-area: title; }
+    &__amount { grid-area: amount; }
+    &__date { grid-area: date; text-align: right; }
+    &__delete { grid-area: delete; justify-self: end; }
+    .badge { grid-area: badge; }
   }
 }
 

@@ -1,4 +1,5 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 .main { max-width: 960px; margin: 0 auto; padding: v.$space-lg v.$space-md; }
 .welcome { padding: v.$space-xl 0; text-align: center; color: v.$muted-color; }
@@ -8,6 +9,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: v.$space-md;
   margin-bottom: v.$space-lg;
+  @include m.respond-to(tablet) { grid-template-columns: 1fr; }
 }
 
 .summary-card {

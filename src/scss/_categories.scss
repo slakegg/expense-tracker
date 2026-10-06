@@ -1,0 +1,20 @@
+@use 'sass:color';
+
+// Цвета категорий: добавьте строку в карту — стиль появится автоматически
+$categories: (
+  food: #4ec9b0,
+  transport: #007acc,
+  entertainment: #ce9178,
+  bills: #f44747,
+  health: #c586c0,
+  salary: #4ade80,
+  other: #9aa0b8
+);
+
+@each $name, $color in $categories {
+  .category--#{$name} {
+    background-color: rgba($color, 0.15);
+    color: $color;
+    border-left: 4px solid $color;
+  }
+}

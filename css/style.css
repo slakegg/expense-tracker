@@ -94,6 +94,11 @@
   gap: 16px;
   margin-bottom: 24px;
 }
+@media (max-width: 1023px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+}
 
 .summary-card {
   padding: 24px;
@@ -130,6 +135,16 @@
   padding: 16px;
   background: #1d2030;
   border-radius: 10px;
+}
+@media (max-width: 1023px) {
+  .form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
 }
 .form__title {
   grid-column: 1/-1;
@@ -172,6 +187,11 @@
   font-size: 0.85rem;
   border-bottom: 1px solid #2c3046;
 }
+@media (max-width: 767px) {
+  .transaction-list__head {
+    display: none;
+  }
+}
 
 .transaction-item {
   display: grid;
@@ -211,10 +231,76 @@
 .transaction-item__delete:hover {
   color: #f87171;
 }
+@media (max-width: 767px) {
+  .transaction-item {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "title amount" "badge date" "delete delete";
+    gap: 8px;
+  }
+  .transaction-item__title {
+    grid-area: title;
+  }
+  .transaction-item__amount {
+    grid-area: amount;
+  }
+  .transaction-item__date {
+    grid-area: date;
+    text-align: right;
+  }
+  .transaction-item__delete {
+    grid-area: delete;
+    justify-self: end;
+  }
+  .transaction-item .badge {
+    grid-area: badge;
+  }
+}
 
 .badge {
   justify-self: start;
   padding: 2px 8px;
   border-radius: 6px;
   font-size: 0.85rem;
+}
+
+.category--food {
+  background-color: rgba(78, 201, 176, 0.15);
+  color: #4ec9b0;
+  border-left: 4px solid #4ec9b0;
+}
+
+.category--transport {
+  background-color: rgba(0, 122, 204, 0.15);
+  color: #007acc;
+  border-left: 4px solid #007acc;
+}
+
+.category--entertainment {
+  background-color: rgba(206, 145, 120, 0.15);
+  color: #ce9178;
+  border-left: 4px solid #ce9178;
+}
+
+.category--bills {
+  background-color: rgba(244, 71, 71, 0.15);
+  color: #f44747;
+  border-left: 4px solid #f44747;
+}
+
+.category--health {
+  background-color: rgba(197, 134, 192, 0.15);
+  color: #c586c0;
+  border-left: 4px solid #c586c0;
+}
+
+.category--salary {
+  background-color: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border-left: 4px solid #4ade80;
+}
+
+.category--other {
+  background-color: rgba(154, 160, 184, 0.15);
+  color: #9aa0b8;
+  border-left: 4px solid #9aa0b8;
 }

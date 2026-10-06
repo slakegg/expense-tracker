@@ -1,4 +1,5 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 .form {
   display: grid;
@@ -8,6 +9,8 @@
   padding: v.$space-md;
   background: v.$surface-color;
   border-radius: v.$radius;
+  @include m.respond-to(tablet) { grid-template-columns: 1fr 1fr; }
+  @include m.respond-to(mobile) { grid-template-columns: 1fr; }
 
   &__title { grid-column: 1 / -1; margin: 0; font-size: 1.1rem; }
   &__field {
