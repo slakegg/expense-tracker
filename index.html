@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Tracker — учёт личных финансов</title>
+</head>
+<body class="page">
+  <header class="header">
+    <div class="header__inner">
+      <span class="header__logo">Expense Tracker</span>
+      <div class="header__user js-user is-hidden">
+        <img class="header__avatar js-avatar" alt="">
+        <span class="header__greeting js-greeting"></span>
+      </div>
+      <button class="btn btn--google js-login" type="button">Войти через Google</button>
+      <button class="btn btn--outline js-logout is-hidden" type="button">Выйти</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <p class="welcome js-welcome">Войдите через Google, чтобы вести учёт доходов и расходов.</p>
+
+    <div class="js-app is-hidden">
+      <section class="summary">
+        <article class="summary-card summary-card--balance">
+          <h2 class="summary-card__label">Баланс</h2>
+          <p class="summary-card__value js-balance">0 ₸</p>
+        </article>
+        <article class="summary-card summary-card--income">
+          <h2 class="summary-card__label">Доходы</h2>
+          <p class="summary-card__value js-income">0 ₸</p>
+        </article>
+        <article class="summary-card summary-card--expense">
+          <h2 class="summary-card__label">Расходы</h2>
+          <p class="summary-card__value js-expense">0 ₸</p>
+        </article>
+      </section>
+
+      <form class="form js-form">
+        <h2 class="form__title">Новая транзакция</h2>
+        <input class="form__field form__field--title" name="title" placeholder="Название" required maxlength="80">
+        <input class="form__field" name="amount" type="number" min="0.01" step="0.01" placeholder="Сумма" required>
+        <select class="form__field js-type" name="type">
+          <option value="expense">Расход</option>
+          <option value="income">Доход</option>
+        </select>
+        <select class="form__field js-category" name="category"></select>
+        <button class="btn btn--primary" type="submit">Добавить</button>
+        <p class="form__error js-error"></p>
+      </form>
+
+      <section class="transactions">
+        <h2 class="transactions__title">Транзакции</h2>
+        <div class="transaction-list">
+          <div class="transaction-list__head">
+            <span>Название</span><span>Категория</span><span>Дата</span><span>Сумма</span><span></span>
+          </div>
+          <div class="js-list">
+            <div class="transaction-item">
+              <span class="transaction-item__title">Пример: продукты</span>
+              <span class="badge category--food">Продукты</span>
+              <span class="transaction-item__date">01.01.2026</span>
+              <span class="transaction-item__amount transaction-item__amount--expense">−5 000 ₸</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
