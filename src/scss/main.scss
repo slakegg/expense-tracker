@@ -1,0 +1,4 @@
+// Главный сборочный файл: только @use, без устаревшего @import
+@use 'variables';
+@use 'mixins';
+@use 'base';

@@ -1,0 +1,24 @@
+// Цвета, шрифты, отступы
+$primary-color: #7c83fd;
+$income-color: #4ade80;
+$expense-color: #f87171;
+
+$bg-color: #14161f;
+$surface-color: #1d2030;
+$border-color: #2c3046;
+$text-color: #e8eaf2;
+$muted-color: #8b90a8;
+
+$font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+$radius: 10px;
+
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 40px;
+
+$breakpoints: (
+  mobile: 767px,
+  tablet: 1023px
+);

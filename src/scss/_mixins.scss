@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use 'variables' as v;
+
+// Адаптив: @include respond-to(mobile) { ... }
+@mixin respond-to($screen) {
+  $width: map.get(v.$breakpoints, $screen);
+  @if $width {
+    @media (max-width: $width) { @content; }
+  } @else {
+    @error "Неизвестный экран `#{$screen}`. Доступны: #{map.keys(v.$breakpoints)}";
+  }
+}
+
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+@mixin flex-center { @include flex(row, center, center); }
+@mixin flex-between { @include flex(row, space-between, center); }
