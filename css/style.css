@@ -263,10 +263,91 @@
   font-size: 0.85rem;
 }
 
+.chart {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #1d2030;
+  border-radius: 10px;
+}
+.chart__title {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+.chart__body {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+}
+@media (max-width: 767px) {
+  .chart__body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+.chart__donut {
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.chart__track {
+  fill: none;
+  stroke: #2c3046;
+  stroke-width: 6;
+}
+.chart__segment {
+  fill: none;
+  stroke-width: 6;
+}
+.chart__legend {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chart__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+.chart__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.chart__name {
+  flex: 1;
+}
+.chart__sum {
+  font-weight: 600;
+}
+.chart__percent {
+  width: 48px;
+  text-align: right;
+  color: #8b90a8;
+}
+.chart__empty {
+  color: #8b90a8;
+}
+
 .category--food {
   background-color: rgba(78, 201, 176, 0.15);
   color: #4ec9b0;
   border-left: 4px solid #4ec9b0;
+}
+
+.category-dot--food {
+  background-color: #4ec9b0;
+}
+
+.chart__segment--food {
+  stroke: #4ec9b0;
 }
 
 .category--transport {
@@ -275,10 +356,26 @@
   border-left: 4px solid #007acc;
 }
 
+.category-dot--transport {
+  background-color: #007acc;
+}
+
+.chart__segment--transport {
+  stroke: #007acc;
+}
+
 .category--entertainment {
   background-color: rgba(206, 145, 120, 0.15);
   color: #ce9178;
   border-left: 4px solid #ce9178;
+}
+
+.category-dot--entertainment {
+  background-color: #ce9178;
+}
+
+.chart__segment--entertainment {
+  stroke: #ce9178;
 }
 
 .category--bills {
@@ -287,10 +384,26 @@
   border-left: 4px solid #f44747;
 }
 
+.category-dot--bills {
+  background-color: #f44747;
+}
+
+.chart__segment--bills {
+  stroke: #f44747;
+}
+
 .category--health {
   background-color: rgba(197, 134, 192, 0.15);
   color: #c586c0;
   border-left: 4px solid #c586c0;
+}
+
+.category-dot--health {
+  background-color: #c586c0;
+}
+
+.chart__segment--health {
+  stroke: #c586c0;
 }
 
 .category--salary {
@@ -299,8 +412,24 @@
   border-left: 4px solid #4ade80;
 }
 
+.category-dot--salary {
+  background-color: #4ade80;
+}
+
+.chart__segment--salary {
+  stroke: #4ade80;
+}
+
 .category--other {
   background-color: rgba(154, 160, 184, 0.15);
   color: #9aa0b8;
   border-left: 4px solid #9aa0b8;
+}
+
+.category-dot--other {
+  background-color: #9aa0b8;
+}
+
+.chart__segment--other {
+  stroke: #9aa0b8;
 }

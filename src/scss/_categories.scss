@@ -17,4 +17,7 @@ $categories: (
     color: $color;
     border-left: 4px solid $color;
   }
+
+  .category-dot--#{$name} { background-color: $color; }
+  .chart__segment--#{$name} { stroke: $color; }
 }

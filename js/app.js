@@ -1,6 +1,6 @@
 // ===== Настройки: вставьте свои значения из Supabase → Project Settings → API =====
-const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+const SUPABASE_URL = 'https://imemocyxtncrcboktgon.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_GuYkojszi3i3O7Zyxb9R9Q_E45A8_zq';
 const CURRENCY = 'KZT'; // RUB, USD, EUR ...
 
 const CATEGORIES = {
@@ -128,6 +128,7 @@ function render() {
   $('.js-income').textContent = money.format(income);
   $('.js-expense').textContent = money.format(expense);
   $('.js-balance').textContent = money.format(income - expense);
+  renderChart();
 
   const list = $('.js-list');
   if (!transactions.length) {
@@ -152,5 +153,49 @@ function render() {
     return item;
   }));
 }
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
+function svgCircle(className, dash, offset) {
+  const c = document.createElementNS(SVG_NS, 'circle');
+  c.setAttribute('class', className);
+  c.setAttribute('cx', '21'); c.setAttribute('cy', '21'); c.setAttribute('r', '15.915');
+  if (dash !== undefined) {
+    c.setAttribute('stroke-dasharray', `${dash} ${100 - dash}`);
+    c.setAttribute('stroke-dashoffset', offset);
+  }
+  return c;
+}
+
+function renderChart() {
+  const totals = {};
+  transactions.filter((t) => t.type === 'expense').forEach((t) => {
+    const cat = CATEGORIES[t.category] ? t.category : 'other';
+    totals[cat] = (totals[cat] || 0) + Number(t.amount);
+  });
+  const rows = Object.entries(totals).sort((a, b) => b[1] - a[1]);
+  const total = rows.reduce((s, [, v]) => s + v, 0);
+  const svg = $('.js-donut');
+  const legend = $('.js-legend');
+  svg.replaceChildren(svgCircle('chart__track'));
+
+  if (!total) {
+    legend.replaceChildren(el('li', 'chart__empty', 'Расходов пока нет'));
+    return;
+  }
+  let shown = 0;
+  const items = rows.map(([cat, sum]) => {
+    const pct = (sum / total) * 100;
+    svg.append(svgCircle(`chart__segment chart__segment--${cat}`, pct, 25 - shown));
+    shown += pct;
+    const li = el('li', 'chart__item');
+    li.append(
+      el('span', `chart__dot category-dot--${cat}`),
+      el('span', 'chart__name', CATEGORIES[cat].label),
+      el('span', 'chart__sum', money.format(sum)),
+      el('span', 'chart__percent', Math.round(pct) + '%')
+    );
+    return li;
+  });
+  legend.replaceChildren(...items);
+}
 fillCategories();
