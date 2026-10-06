@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "sass": "sass src/scss/main.scss css/style.css --no-source-map",
-    "sass:watch": "sass --watch src/scss/main.scss css/style.css --no-source-map"
+    "sass:watch": "sass --watch src/scss/main.scss css/style.css --no-source-map",  
+    "build": "npm run sass && node scripts/build-config.js"
   },
   "devDependencies": { "sass": "^1.77.0" }
 }
