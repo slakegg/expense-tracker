@@ -1,5 +1,5 @@
-// ===== Настройки: вставьте свои значения из Supabase → Project Settings → API =====
-   import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
+
 const CURRENCY = 'KZT'; // RUB, USD, EUR ...
 
 const CATEGORIES = {
@@ -20,7 +20,7 @@ let user = null;
 let transactions = [];
 let channel = null;
 
-// ---------- Авторизация ----------
+// ---------- Авторизация через Google ----------
 $('.js-login').addEventListener('click', () =>
   db.auth.signInWithOAuth({
     provider: 'google',
@@ -38,14 +38,16 @@ async function setUser(newUser) {
   $('.js-login').classList.toggle('is-hidden', loggedIn);
   $('.js-logout').classList.toggle('is-hidden', !loggedIn);
   $('.js-user').classList.toggle('is-hidden', !loggedIn);
-  $('.js-welcome').classList.toggle('is-hidden', loggedIn);
+  $('.js-auth').classList.toggle('is-hidden', loggedIn);
   $('.js-app').classList.toggle('is-hidden', !loggedIn);
   if (channel) { db.removeChannel(channel); channel = null; }
 
   if (!loggedIn) { transactions = []; render(); return; }
   const meta = user.user_metadata || {};
   $('.js-greeting').textContent = `Привет, ${meta.full_name || meta.name || user.email}!`;
-  $('.js-avatar').src = meta.avatar_url || meta.picture || '';
+  const avatar = meta.avatar_url || meta.picture || '';
+  $('.js-avatar').src = avatar;
+  $('.js-avatar').classList.toggle('is-hidden', !avatar);
   await loadTransactions();
   subscribe();
 }
@@ -151,6 +153,8 @@ function render() {
     return item;
   }));
 }
+
+// ---------- Диаграмма расходов ----------
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 function svgCircle(className, dash, offset) {
@@ -196,4 +200,69 @@ function renderChart() {
   });
   legend.replaceChildren(...items);
 }
+
+// ---------- Вход / регистрация / восстановление ----------
+const authForm = $('.js-auth-form');
+const authTitles = { login: 'Войти', signup: 'Зарегистрироваться', reset: 'Сменить пароль и войти' };
+let authMode = 'login';
+
+function authMessage(text, ok = false) {
+  const box = $('.js-auth-message');
+  box.textContent = text;
+  box.classList.toggle('auth__message--ok', ok);
+}
+
+function setAuthMode(mode) {
+  authMode = mode;
+  document.querySelectorAll('.js-tab').forEach((tab) =>
+    tab.classList.toggle('auth__tab--active', tab.dataset.mode === mode));
+  const phrase = $('.js-phrase');
+  phrase.classList.toggle('is-hidden', mode === 'login');
+  phrase.required = mode !== 'login';
+  phrase.placeholder = mode === 'signup'
+    ? 'Секретная фраза (для восстановления пароля)' : 'Секретная фраза';
+  authForm.password.placeholder = mode === 'reset' ? 'Новый пароль' : 'Пароль';
+  $('.js-forgot').classList.toggle('is-hidden', mode !== 'login');
+  $('.js-auth-submit').textContent = authTitles[mode];
+  authMessage('');
+}
+
+document.querySelectorAll('.js-tab').forEach((tab) =>
+  tab.addEventListener('click', () => setAuthMode(tab.dataset.mode)));
+$('.js-forgot').addEventListener('click', () => setAuthMode('reset'));
+
+authForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = authForm.email.value.trim();
+  const password = authForm.password.value;
+  const phrase = authForm.phrase.value.trim();
+  authMessage('Подождите…', true);
+  let error;
+
+  if (authMode === 'login') {
+    ({ error } = await db.auth.signInWithPassword({ email, password }));
+  } else if (authMode === 'signup') {
+    const res = await db.auth.signUp({
+      email, password,
+      options: {
+        data: { secret_phrase: phrase },
+        emailRedirectTo: window.location.origin + window.location.pathname
+      }
+    });
+    error = res.error;
+    if (!error && !res.data.session) {
+      return authMessage('Мы отправили письмо: подтвердите почту и войдите.', true);
+    }
+  } else {
+    const res = await db.functions.invoke('reset-password', { body: { email, phrase, password } });
+    error = res.error || (res.data?.error ? { message: res.data.error } : null);
+    if (!error) ({ error } = await db.auth.signInWithPassword({ email, password }));
+  }
+
+  if (error) return authMessage(error.message);
+  authForm.reset();
+  authMessage('');
+});
+
+setAuthMode('login');
 fillCategories();

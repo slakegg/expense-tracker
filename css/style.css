@@ -430,3 +430,62 @@
 .chart__segment--other {
   stroke: #9aa0b8;
 }
+
+.auth {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #1d2030;
+  border: 1px solid #2c3046;
+  border-radius: 10px;
+}
+.auth__tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.auth__tab {
+  flex: 1;
+  padding: 8px;
+  background: none;
+  color: #8b90a8;
+  border: 0;
+  border-bottom: 2px solid #2c3046;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.auth__tab--active {
+  color: #e8eaf2;
+  border-bottom-color: #7c83fd;
+}
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 8px;
+}
+.auth__link {
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #7c83fd;
+  font: inherit;
+  cursor: pointer;
+}
+.auth__link:hover {
+  text-decoration: underline;
+}
+.auth__message {
+  min-height: 1.5em;
+  margin: 0;
+  color: #f87171;
+}
+.auth__message--ok {
+  color: #4ade80;
+}

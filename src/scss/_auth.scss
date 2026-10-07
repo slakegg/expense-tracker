@@ -1,0 +1,42 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.auth {
+  max-width: 420px;
+  margin: v.$space-xl auto;
+  padding: v.$space-lg;
+  background: v.$surface-color;
+  border: 1px solid v.$border-color;
+  border-radius: v.$radius;
+
+  &__tabs { @include m.flex(row, flex-start, stretch, v.$space-sm); margin-bottom: v.$space-md; }
+  &__tab {
+    flex: 1;
+    padding: v.$space-sm;
+    background: none;
+    color: v.$muted-color;
+    border: 0;
+    border-bottom: 2px solid v.$border-color;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    &--active { color: v.$text-color; border-bottom-color: v.$primary-color; }
+  }
+  &__form { @include m.flex(column, flex-start, stretch, v.$space-sm); }
+  &__link {
+    align-self: flex-start;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: v.$primary-color;
+    font: inherit;
+    cursor: pointer;
+    &:hover { text-decoration: underline; }
+  }
+  &__message {
+    min-height: 1.5em;
+    margin: 0;
+    color: v.$expense-color;
+    &--ok { color: v.$income-color; }
+  }
+}

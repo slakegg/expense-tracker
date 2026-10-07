@@ -20,7 +20,20 @@
   </header>
 
   <main class="main">
-    <p class="welcome js-welcome">Войдите через Google, чтобы вести учёт доходов и расходов.</p>
+    <section class="auth js-auth">
+  <div class="auth__tabs">
+    <button class="auth__tab auth__tab--active js-tab" data-mode="login" type="button">Вход</button>
+    <button class="auth__tab js-tab" data-mode="signup" type="button">Регистрация</button>
+  </div>
+  <form class="auth__form js-auth-form">
+    <input class="form__field" name="email" type="email" placeholder="Почта" required autocomplete="email">
+    <input class="form__field" name="password" type="password" minlength="6" placeholder="Пароль" required>
+    <input class="form__field is-hidden js-phrase" name="phrase" minlength="6" autocomplete="off" placeholder="Секретная фраза">
+    <button class="btn btn--primary js-auth-submit" type="submit">Войти</button>
+    <button class="auth__link js-forgot" type="button">Забыли пароль?</button>
+    <p class="auth__message js-auth-message"></p>
+  </form>
+</section>
 
     <div class="js-app is-hidden">
       <section class="summary">
