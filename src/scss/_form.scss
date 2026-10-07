@@ -3,7 +3,7 @@
 
 .form {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr auto;
   gap: v.$space-sm;
   margin-bottom: v.$space-lg;
   padding: v.$space-md;

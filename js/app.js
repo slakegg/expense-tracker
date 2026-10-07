@@ -82,7 +82,7 @@ $('.js-form').addEventListener('submit', async (e) => {
   const f = new FormData(form);
   const { data, error } = await db.from('transactions').insert({
     user_id: user.id,
-    title: f.get('title').trim(),
+    title: CATEGORIES[f.get('category')].label,
     amount: Number(f.get('amount')),
     type: f.get('type'),
     category: f.get('category')

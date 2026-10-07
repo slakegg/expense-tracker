@@ -129,7 +129,7 @@
 
 .form {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr auto;
   gap: 8px;
   margin-bottom: 24px;
   padding: 16px;
