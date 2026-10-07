@@ -142,7 +142,6 @@ function render() {
     del.title = 'Удалить';
     del.addEventListener('click', () => removeTransaction(t.id));
     item.append(
-      el('span', 'transaction-item__title', t.title),
       el('span', `badge category--${cat}`, CATEGORIES[cat].label),
       el('span', 'transaction-item__date', new Date(t.created_at).toLocaleDateString('ru-RU')),
       el('span', `transaction-item__amount transaction-item__amount--${t.type}`,

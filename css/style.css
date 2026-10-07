@@ -180,7 +180,7 @@
 }
 .transaction-list__head {
   display: grid;
-  grid-template-columns: 1fr 150px 110px 140px 40px;
+  grid-template-columns: 1fr 140px 140px 40px;
   gap: 16px;
   padding: 8px 16px;
   color: #8b90a8;
@@ -195,7 +195,7 @@
 
 .transaction-item {
   display: grid;
-  grid-template-columns: 1fr 150px 110px 140px 40px;
+  grid-template-columns: 1fr 140px 140px 40px;
   gap: 16px;
   align-items: center;
   padding: 16px;
@@ -234,18 +234,15 @@
 @media (max-width: 767px) {
   .transaction-item {
     grid-template-columns: 1fr auto;
-    grid-template-areas: "title amount" "badge date" "delete delete";
+    grid-template-areas: "badge amount" "date delete";
     gap: 8px;
-  }
-  .transaction-item__title {
-    grid-area: title;
   }
   .transaction-item__amount {
     grid-area: amount;
   }
   .transaction-item__date {
     grid-area: date;
-    text-align: right;
+    text-align: left;
   }
   .transaction-item__delete {
     grid-area: delete;

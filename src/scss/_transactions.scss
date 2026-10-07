@@ -3,7 +3,7 @@
 
 .transactions__title { margin: 0 0 v.$space-md; font-size: 1.1rem; }
 
-$columns: 1fr 150px 110px 140px 40px;
+$columns: 1fr 140px 140px 40px;
 
 .transaction-list {
   background: v.$surface-color;
@@ -47,13 +47,12 @@ $columns: 1fr 150px 110px 140px 40px;
   // Мобильные: строка таблицы превращается в вертикальную карточку
   @include m.respond-to(mobile) {
     grid-template-columns: 1fr auto;
-    grid-template-areas: 'title amount' 'badge date' 'delete delete';
-    gap: v.$space-sm;
-    &__title { grid-area: title; }
-    &__amount { grid-area: amount; }
-    &__date { grid-area: date; text-align: right; }
-    &__delete { grid-area: delete; justify-self: end; }
-    .badge { grid-area: badge; }
+grid-template-areas: 'badge amount' 'date delete';
+gap: v.$space-sm;
+&__amount { grid-area: amount; }
+&__date { grid-area: date; text-align: left; }
+&__delete { grid-area: delete; justify-self: end; }
+.badge { grid-area: badge; }
   }
 }
 
